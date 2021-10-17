@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 
+import { darken, transparentize } from 'polished';
+
 export const Container = styled.form`
   h2 {
     color: var(--text-title);
@@ -28,7 +30,7 @@ export const Container = styled.form`
     }
   }
 
-  button {
+  button[type='submit'] {
     background: var(--green);
     padding: 1.25rem;
     width: 100%;
@@ -46,5 +48,50 @@ export const Container = styled.form`
     &:hover {
       filter: brightness(0.9);
     }
+  }
+`;
+
+export const TransactionTypeContainer = styled.div`
+  margin: 1rem 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+`;
+
+interface TransactionTypeButtonProps {
+  isActive: boolean;
+  activeColor: 'green' | 'red';
+}
+
+const colors = {
+  green: '#33cc95',
+  red: '#E52E4D',
+};
+
+export const TransactionTypeButton = styled.button<TransactionTypeButtonProps>`
+  padding: 1.25rem;
+  background-color: ${(props) =>
+    props.isActive
+      ? transparentize(0.9, colors[props.activeColor])
+      : 'transparent'};
+  color: var(--text-title);
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  border: solid 1px #969cb2;
+  border-radius: 0.25rem;
+
+  transition: border-color 200ms;
+
+  &:hover {
+    border-color: ${darken(0.1, '#969cb2')};
+  }
+
+  span {
+    margin-left: 1rem;
   }
 `;
