@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { FormEvent, useState } from 'react';
 import Modal from 'react-modal';
 
 import closeImg from '../../assets/close.svg';
@@ -21,7 +21,12 @@ export const NewTransactionModal = ({
   isOpen,
   onRequestClose,
 }: NewTransactionModalProps) => {
+  const [title, setTitle] = useState('');
+  const [value, setValue] = useState(0);
   const [type, setType] = useState('deposit');
+  const [category, setCategory] = useState('');
+
+  const handleSubmit = (event: FormEvent) => {};
 
   return (
     <Modal
@@ -37,10 +42,23 @@ export const NewTransactionModal = ({
       >
         <img src={closeImg} alt="Fechar modal" />
       </button>
-      <Container>
+      <Container onClick={handleSubmit}>
         <h2>Cadastrar transação</h2>
-        <input placeholder="Título" />
-        <input placeholder="Valor" type="number" />
+        <input
+          placeholder="Título"
+          value={title}
+          onChange={(event) => {
+            setTitle(event.target.value);
+          }}
+        />
+        <input
+          placeholder="Valor"
+          type="number"
+          value={value}
+          onChange={(event) => {
+            setValue(Number(event.target.value));
+          }}
+        />
         <TransactionTypeContainer>
           <TransactionTypeButton
             type="button"
@@ -61,7 +79,13 @@ export const NewTransactionModal = ({
             <span>Saída</span>
           </TransactionTypeButton>
         </TransactionTypeContainer>
-        <input placeholder="Categoria" />
+        <input
+          placeholder="Categoria"
+          value={category}
+          onChange={(event) => {
+            setCategory(event.target.value);
+          }}
+        />
         <button type="submit">Cadastrar</button>
       </Container>
     </Modal>
