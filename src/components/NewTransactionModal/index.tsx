@@ -4,6 +4,7 @@ import Modal from 'react-modal';
 import closeImg from '../../assets/close.svg';
 import incomeImg from '../../assets/income.svg';
 import outcomeImg from '../../assets/outcome.svg';
+import { api } from '../../services/api';
 import {
   Container,
   TransactionTypeButton,
@@ -26,7 +27,16 @@ export const NewTransactionModal = ({
   const [type, setType] = useState('deposit');
   const [category, setCategory] = useState('');
 
-  const handleSubmit = (event: FormEvent) => {};
+  const handleSubmit = (event: FormEvent) => {
+    event.preventDefault();
+
+    return api.post('/transactions', {
+      title,
+      value,
+      type,
+      category,
+    });
+  };
 
   return (
     <Modal
