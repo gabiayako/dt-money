@@ -5,7 +5,6 @@ import closeImg from '../../assets/close.svg';
 import incomeImg from '../../assets/income.svg';
 import outcomeImg from '../../assets/outcome.svg';
 import { TransactionsContext } from '../../context/TransactionsContext';
-import { api } from '../../services/api';
 import {
   Container,
   TransactionTypeButton,
@@ -30,15 +29,25 @@ export const NewTransactionModal = ({
   const [type, setType] = useState<'deposit' | 'withdraw'>('deposit');
   const [category, setCategory] = useState('');
 
-  const handleSubmit = (event: FormEvent) => {
+  const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
 
-    createTransaction({
+    await createTransaction({
       title,
       amount,
       type,
       category,
     });
+
+    resetFields();
+    onRequestClose();
+  };
+
+  const resetFields = () => {
+    setTitle('');
+    setAmount(0);
+    setType('deposit');
+    setCategory('');
   };
 
   return (
@@ -55,7 +64,7 @@ export const NewTransactionModal = ({
       >
         <img src={closeImg} alt="Fechar modal" />
       </button>
-      <Container onClick={handleSubmit}>
+      <Container>
         <h2>Cadastrar transação</h2>
         <input
           placeholder="Título"
@@ -99,7 +108,9 @@ export const NewTransactionModal = ({
             setCategory(event.target.value);
           }}
         />
-        <button type="submit">Cadastrar</button>
+        <button type="submit" onClick={handleSubmit}>
+          Cadastrar
+        </button>
       </Container>
     </Modal>
   );

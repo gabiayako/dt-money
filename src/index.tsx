@@ -32,12 +32,16 @@ createServer({
   routes() {
     this.namespace = 'api';
     this.get('/transactions', () => {
-      return this.schema.all('transaction').models;
+      return this.schema.all('transaction');
     });
 
     this.post('/transactions', (schema, request) => {
       const data = JSON.parse(request.requestBody);
-      return schema.create('transaction', data);
+      const date = new Date();
+      return schema.create('transaction', {
+        ...data,
+        createdAt: date.toISOString(),
+      });
     });
   },
 });
