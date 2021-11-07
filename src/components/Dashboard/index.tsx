@@ -5,7 +5,7 @@ import { Container } from './styles';
 export const Dashboard = () => {
   return (
     <Container>
-      <Summary title="Entradas" amount={17400} />
+      <Summary />
       <TransactionsTable />
     </Container>
   );
