@@ -2,7 +2,7 @@
 
 With dt-money you can control your expenses in a straightforward way. This project is part of a trainment provided by [Rocketseat](https://www.rocketseat.com.br/).
 
-<img src="../dt-money/src/assets/dt-money.gif"/>
+![dt-money-video](https://github.com/gabiayako/dt-money/blob/master/src/assets/dt-money.gif)
 
 ## Technologies
 
